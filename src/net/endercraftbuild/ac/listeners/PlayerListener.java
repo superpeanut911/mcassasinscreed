@@ -1,23 +1,35 @@
 package net.endercraftbuild.ac.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.endercraftbuild.ac.ACMain;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class PlayerListener implements Listener {
 
 	private ACMain plugin;
-
+    
+	public List<String> justJumped = new ArrayList<String>();
+	
 	public PlayerListener(ACMain plugin) {
 		this.plugin = plugin;
 	}
@@ -70,10 +82,44 @@ public class PlayerListener implements Listener {
 				p.sendMessage(plugin.prefix + ChatColor.RED + "You are now hidden in the shadows");
 			}
 		}
-	}
+		}
+	 @EventHandler
+	    public void join(PlayerJoinEvent event) {
+	        Player player = event.getPlayer();
+	       // if(player.hasPermission("ac.doublejump")) {
+	        player.setAllowFlight(true);
+	    //}
+	 }
+	 @EventHandler
+	    public void setFlyOnJump(PlayerToggleFlightEvent event) {
+	        Player player = event.getPlayer();
+	        Vector jump = player.getLocation().getDirection().multiply(0.2).setY(1);
+	        Location loc = player.getLocation();
+	        Block block = loc.add(0, -1, 0).getBlock();
+	        
+	        if(event.isFlying() && event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+	        	
+	        if(block.getType() != Material.AIR) {
+	        	
+	                player.setFlying(false);
+	                player.setVelocity(player.getVelocity().add(jump));
+	                player.playSound(loc, Sound.IRONGOLEM_THROW, 10, -10);
+	                player.sendMessage(plugin.prefix + ChatColor.RED + "WOOSH");
+	    
+	        } else 
+	                if(block.getType() == Material.AIR) {
+	                    player.setAllowFlight(true);
+	                } else {
+	                    player.setFlying(false);
+	                    player.setAllowFlight(true);
+	                    
+	                }
+	        	event.setCancelled(true);
+	            }
+	           
+	        }
 }
-
-
+	   
 
 
 

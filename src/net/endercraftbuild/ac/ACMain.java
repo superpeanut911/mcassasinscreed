@@ -15,6 +15,9 @@ public class ACMain extends JavaPlugin {
 	
 	private Economy economy;
 	
+	//Use RandomChests plugin to randomize items
+	//Use gold is money plugin to make gold the physical econ
+	//TODO Mana system, Parkour verticle climbing, Assassinations.
 	
 	public void onEnable() {
 		//if(!(getServer().getIp() == "127.0.0.1"))
