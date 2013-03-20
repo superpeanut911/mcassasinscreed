@@ -2,6 +2,7 @@ package net.endercraftbuild.ac.commands;
 
 import net.endercraftbuild.ac.ACMain;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +23,7 @@ public class ReloadCmd implements CommandExecutor {
 			return true;
 		
 		plugin.reload();
-		sender.sendMessage(plugin.prefix + "Reloaded config!");
+		sender.sendMessage(plugin.prefix + ChatColor.RED + "Reloaded config!");
 
 		return true;
 	}
