@@ -68,14 +68,14 @@ public class PlayerListener implements Listener {
 		Location l = p.getLocation();
 
 
-		Location blockbellowplayer = new Location(l.getWorld(), l.getX(),
-				l.getY() - 1, l.getZ());
+		Location blockaboveplayer = new Location(l.getWorld(), l.getX(),
+				l.getY() + 1, l.getZ());
 		if(p.hasPotionEffect(PotionEffectType.INVISIBILITY))
 			return;
 
-		if(blockbellowplayer != null)
+		if(blockaboveplayer != null)
 		{
-			int lightlevel = blockbellowplayer.getBlock().getLightLevel();
+			int lightlevel = blockaboveplayer.getBlock().getLightLevel();
 			if(lightlevel < 1 && p.isSneaking())
 			{
 				p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 240, 1));
