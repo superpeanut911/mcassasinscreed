@@ -2,3 +2,23 @@ name: ECB AC
 main: net.endercraftbuild.ac.ACMain
 version: 1.0
 author: superpeanut911, MortuTBK
+permissions:
+    ac.admin.*:
+        description: Bypass Everything
+        children:
+            ac.doublejump: false
+            ac.admin.reload: true
+    ac.doublejump:
+        description: Allows Double Jumping
+        default: true
+    ac.admin.reload:
+        description: Allows Double Jumping
+        default: false
+commands:
+# player commands
+  acreload:
+    description: Joins a game.
+    usage: |
+      /<command>
+    permissions: ac.admin.reload
+    permission-message: You do not have permission to run that 
