@@ -18,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -48,11 +49,12 @@ public class PlayerListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	public void SneakFall(EntityDamageEvent event) {
-		Player player = (Player) event.getEntity();
-		Integer playerexp = player.getTotalExperience();
 
 		if(event.getEntity() instanceof Player)
 		{
+		Player player = (Player) event.getEntity();
+		Integer playerexp = player.getTotalExperience();
+		
 			if(playerexp < 2)
 				player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
 			else {
@@ -119,8 +121,13 @@ public class PlayerListener implements Listener {
 		Utils.setEnergy(player, playerexp += 1);
 		//Give kit when they respawn (The Feather for double jumps, etc.)
 	}
-		
-		
+	
+	@EventHandler(ignoreCancelled = true)
+	public void PreventNaturalGain(PlayerExpChangeEvent event) { //Prevent getting exp naturaly
+		//event.setCancelled(true); This event isn't cancellable... 
+		//TODO : Cancel all world exp drops
+	}
+	
 	@EventHandler(ignoreCancelled = true)
 	public void DoubleJump(final PlayerMoveEvent event) { //Jump
 

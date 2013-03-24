@@ -24,7 +24,7 @@ public class EnergyListener implements Listener {
 
 			public void run() {
 				Integer playerexp = player.getTotalExperience();
-				if(playerexp == 16)
+				if(playerexp >= 16)
 					return;
 				try {
 					Thread.sleep(80);
