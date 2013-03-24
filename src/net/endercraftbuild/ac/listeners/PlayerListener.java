@@ -55,15 +55,16 @@ public class PlayerListener implements Listener {
 		Player player = (Player) event.getEntity();
 		Integer playerexp = player.getTotalExperience();
 		
-			if(playerexp < 2)
-				player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
-			else {
+			
 				if(event.getCause() == DamageCause.FALL) 
 				{
 					//check if they have enough mana (small amount)
 					if(player.isSneaking() && event.getDamage() > 1)	
 					{
-						Utils.setEnergy(player, playerexp -= 2);
+						if(playerexp < 6)
+							player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
+						else {
+						Utils.setEnergy(player, playerexp -= 6);
 						event.setCancelled(true);
 						player.sendMessage(plugin.prefix + ChatColor.RED + "**ROLL**");
 					}
@@ -116,7 +117,7 @@ public class PlayerListener implements Listener {
 	public void Respawn(PlayerRespawnEvent event) { //player dies and looses energy - start task
 		Player player = event.getPlayer();
 		Integer playerexp = player.getTotalExperience();
-		if(playerexp == 16)
+		if(playerexp >= 16)
 			return;
 		Utils.setEnergy(player, playerexp += 1);
 		//Give kit when they respawn (The Feather for double jumps, etc.)
