@@ -3,7 +3,6 @@ package net.endercraftbuild.ac.utils;
 import java.util.List;
 import java.util.Map;
 
-import net.endercraftbuild.ac.ACMain;
 import net.endercraftbuild.ac.events.EnergyChangeEvent;
 
 import org.bukkit.Bukkit;
@@ -84,6 +83,8 @@ public static void setEnergy(final Player player, Integer energy) {
 	EnergyChangeEvent eevent = new EnergyChangeEvent(player);
 	// Call the event
 	Bukkit.getServer().getPluginManager().callEvent(eevent);
+	if(playerexp == 2 || playerexp == 6 || playerexp == 12 || playerexp == 16) {
 	player.sendMessage("[" + ChatColor.DARK_RED + ChatColor.BOLD + "ECB AC" + ChatColor.RESET + "] " + ChatColor.RED + "Energy: " + ChatColor.GOLD + playerexp.toString() + "/16");
 	}
+}
 }
