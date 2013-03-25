@@ -93,11 +93,11 @@ public class PlayerListener implements Listener {
 		if(blockaboveplayer != null)
 		{
 			int lightlevel = blockaboveplayer.getBlock().getLightLevel();
-			if(lightlevel < 1.5 && p.isSneaking())
+			if(lightlevel <= 1.5 && p.isSneaking())
 			{
 				
-					Utils.setEnergy(p, playerexp -= 6);
-					p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 240, 1));
+					Utils.setEnergy(p, playerexp -= 8);
+					p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 160, 1));
 
 					p.sendMessage(plugin.prefix + ChatColor.RED + "You are now hidden in the shadows");
 				}
