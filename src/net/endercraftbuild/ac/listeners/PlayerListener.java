@@ -2,6 +2,7 @@ package net.endercraftbuild.ac.listeners;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.endercraftbuild.ac.ACMain;
 import net.endercraftbuild.ac.utils.Utils;
@@ -49,24 +50,29 @@ public class PlayerListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	public void SneakFall(EntityDamageEvent event) {
-
 		if(event.getEntity() instanceof Player)
 		{
 		Player player = (Player) event.getEntity();
 		Integer playerexp = player.getTotalExperience();
+
+
+		if(event.getCause() == DamageCause.FALL) 
+		{
 		
-			
-				if(event.getCause() == DamageCause.FALL) 
-				{
-					//check if they have enough mana (small amount)
-					if(player.isSneaking() && event.getDamage() > 1)	
-					{
-						if(playerexp < 6)
-							player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
+			if(player.isSneaking() && event.getDamage() < 14)
+				
+			{		
+			if(playerexp < 6)
+				player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
 						else {
 						Utils.setEnergy(player, playerexp -= 6);
 						event.setCancelled(true);
 						player.sendMessage(plugin.prefix + ChatColor.RED + "**ROLL**");
+						}
+				}
+						else {
+						if(event.getDamage() > 13) {
+							player.sendMessage(plugin.prefix + ChatColor.RED + "ROLL FAILED!");
 					}
 				}
 			}
