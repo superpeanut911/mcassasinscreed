@@ -25,7 +25,7 @@ public static void giveKit(Player player, ConfigurationSection config) {//I mess
 		if (!player.hasPermission("ac.kits." + kitName))
 			continue;
 
-		List<Map<?, ?>> items = config.getMapList("ac.kits." + kitName);
+		List<Map<?, ?>> items = config.getMapList("kits.ac." + kitName);
 		for (Map<?, ?> item : items) {
 			ItemStack itemStack = new ItemStack((Integer) item.get("id"), 1);
 
@@ -67,7 +67,6 @@ public static ItemStack setItemName(ItemStack is, String str) {
 	return is;
 	}
 
-@SuppressWarnings("deprecation")
 public static void setEnergy(final Player player, Integer energy) {
 	player.setTotalExperience(energy);
     player.setLevel(0);

@@ -75,13 +75,13 @@ public class ACMain extends JavaPlugin {
 		return economy;
 	}
 
-private void registerDynamicPermissions() {
-	ConfigurationSection allKits = getConfig().getConfigurationSection("kits.ac");
-	for (String gameType : allKits.getKeys(false)) {
-		ConfigurationSection gameTypeKits = allKits.getConfigurationSection("kits.ac");
-			Permission permission = new Permission("ac.kits" + ".normal", PermissionDefault.FALSE);
+	private void registerDynamicPermissions() {
+		ConfigurationSection allKits = getConfig().getConfigurationSection("kits.ac");
+		for (String kitName : allKits.getKeys(false)) {
+			Permission permission = new Permission("ac.kits." + kitName, PermissionDefault.FALSE);
 			getServer().getPluginManager().addPermission(permission);
 		}
 	}
+
 }
 

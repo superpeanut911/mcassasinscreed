@@ -2,8 +2,6 @@ package net.endercraftbuild.ac.listeners;
 
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import net.endercraftbuild.ac.ACMain;
 import net.endercraftbuild.ac.utils.Utils;
 

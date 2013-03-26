@@ -1,8 +1,8 @@
 # Global configuration settings.
 
 # Player kit setup.  In order for a player to get a kit when they spawn they
-# must have a permission similar to 'cod.kits.zombies.normal'.  If a player
-# has more than one kit permission, they will get all kits they have the proper
+# must have a permission similar to 'ac.kits.normal'.  If a player has more
+# than one kit permission, they will get all kits they have the proper
 # permssion nodes for.
 kits:
   ac:
