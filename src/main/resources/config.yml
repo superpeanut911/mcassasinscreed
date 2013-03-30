@@ -4,6 +4,15 @@
 # must have a permission similar to 'ac.kits.normal'.  If a player has more
 # than one kit permission, they will get all kits they have the proper
 # permssion nodes for.
+
+Jump Height: 5
+Message On Jump: true
+Message: Jumped!
+Sound: true
+Effect On Jump: true
+Wall Jump: false
+Jump Forward: false
+
 kits:
   ac:
     normal:
