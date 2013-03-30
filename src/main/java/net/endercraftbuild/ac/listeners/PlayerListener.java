@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -134,12 +135,12 @@ public class PlayerListener implements Listener {
 	}
 	
 	@EventHandler(ignoreCancelled = true)
-	public void DoubleJump(final PlayerMoveEvent event) { //Jump
+	public void DoubleJump(final PlayerInteractEvent event) { //Jump
 
 		Player player = event.getPlayer();
 		Integer playerexp = player.getTotalExperience();
 		Location loc = player.getLocation();
-		Vector jump = player.getLocation().getDirection().multiply(0.2).setY(1);
+		Vector jump = player.getLocation().getDirection().multiply(0.22).setY(1);
 		if(playerexp >= 4)
 		{
 
@@ -147,7 +148,7 @@ public class PlayerListener implements Listener {
 				return;
 			if(!player.hasPermission("ac.doublejump"))
 					return;
-			if (event.getTo().getBlockY() > event.getFrom().getY() && player.getItemInHand().getType() == Material.FEATHER)
+			if (player.getItemInHand().getType() == Material.FEATHER)
 			{
 				if (!event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR))
 				{
