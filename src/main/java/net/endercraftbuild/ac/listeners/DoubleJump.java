@@ -31,7 +31,6 @@ public class DoubleJump implements Listener {
 	private List<String> justJumped = new ArrayList<String>();
 	
 	public DoubleJump(ACMain instance) {
-		Bukkit.getServer().getPluginManager().registerEvents(this, instance);
 		this.plugin = instance;
 	}
 	
