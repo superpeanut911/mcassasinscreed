@@ -14,6 +14,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -152,6 +153,8 @@ public class PlayerListener implements Listener {
 			{
 				if (!event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR))
 				{
+					if((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK
+							|| event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 					player.setVelocity(player.getVelocity().add(jump));
 					player.playSound(loc, Sound.IRONGOLEM_THROW, 10, -10);
 					player.sendMessage(plugin.prefix + ChatColor.RED + "**WOOSH**");
@@ -176,4 +179,5 @@ public class PlayerListener implements Listener {
 			}
 		}
 	}
+}
 
