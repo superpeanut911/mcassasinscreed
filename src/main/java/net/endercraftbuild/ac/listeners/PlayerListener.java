@@ -269,7 +269,6 @@ public class PlayerListener implements Listener {
 		Location loc = player.getLocation();
 		Block block = loc.add(0, -1, 0).getBlock();
 
-		if(player.hasPermission("doublejump.jump")) {
 			if(block.getType() == Material.AIR) {
 				if(!justJumped.contains(player.getName())) {
 					justJumped.add(player.getName());
@@ -280,13 +279,9 @@ public class PlayerListener implements Listener {
 					player.setAllowFlight(true);
 					player.setFlying(false);
 				}
-			}
-		} else {
-			justJumped.remove(player.getName());
-			player.setAllowFlight(false);
-			player.setFlying(false);
+			
 		}
 
+		}
 	}
-}
 
