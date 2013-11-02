@@ -1,8 +1,8 @@
-package net.endercraftbuild.ac.listeners;
+package main.java.net.endercraftbuild.ac.listeners;
 
-import net.endercraftbuild.ac.ACMain;
-import net.endercraftbuild.ac.events.EnergyChangeEvent;
-import net.endercraftbuild.ac.utils.Utils;
+import main.java.net.endercraftbuild.ac.ACMain;
+import main.java.net.endercraftbuild.ac.events.EnergyChangeEvent;
+import main.java.net.endercraftbuild.ac.utils.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -26,14 +26,9 @@ public class EnergyListener implements Listener {
 				Integer playerexp = player.getTotalExperience();
 				if(playerexp >= 16)
 					return;
-				try {
-					Thread.sleep(80);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			
 				Utils.setEnergy(player, playerexp += 1);
 			}
-		}, 20L);
+		}, 60L);
 	}
 }

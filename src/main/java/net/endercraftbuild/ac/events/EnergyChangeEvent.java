@@ -1,4 +1,4 @@
-package net.endercraftbuild.ac.events;
+package main.java.net.endercraftbuild.ac.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;

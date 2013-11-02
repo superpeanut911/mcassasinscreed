@@ -1,9 +1,9 @@
-package net.endercraftbuild.ac.utils;
+package main.java.net.endercraftbuild.ac.utils;
 
 import java.util.List;
 import java.util.Map;
 
-import net.endercraftbuild.ac.events.EnergyChangeEvent;
+import main.java.net.endercraftbuild.ac.events.EnergyChangeEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

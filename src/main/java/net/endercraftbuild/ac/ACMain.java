@@ -1,11 +1,10 @@
-package net.endercraftbuild.ac;
+package main.java.net.endercraftbuild.ac;
 
 import java.io.File;
 
-import net.endercraftbuild.ac.commands.ReloadCmd;
-import net.endercraftbuild.ac.listeners.DoubleJump;
-import net.endercraftbuild.ac.listeners.EnergyListener;
-import net.endercraftbuild.ac.listeners.PlayerListener;
+import main.java.net.endercraftbuild.ac.commands.ReloadCmd;
+import main.java.net.endercraftbuild.ac.listeners.EnergyListener;
+import main.java.net.endercraftbuild.ac.listeners.PlayerListener;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.ChatColor;
@@ -54,7 +53,6 @@ public class ACMain extends JavaPlugin {
 	private void registerListeners() {
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 		getServer().getPluginManager().registerEvents(new EnergyListener(this), this);
-		getServer().getPluginManager().registerEvents(new DoubleJump(this), this);
 	}
 	
 	private void registerCommands() {

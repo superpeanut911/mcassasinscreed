@@ -1,6 +1,6 @@
-package net.endercraftbuild.ac.commands;
+package main.java.net.endercraftbuild.ac.commands;
 
-import net.endercraftbuild.ac.ACMain;
+import main.java.net.endercraftbuild.ac.ACMain;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

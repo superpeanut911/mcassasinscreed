@@ -1,21 +1,17 @@
-package net.endercraftbuild.ac.listeners;
+package main.java.net.endercraftbuild.ac.listeners;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.endercraftbuild.ac.ACMain;
-import net.endercraftbuild.ac.utils.Utils;
+import main.java.net.endercraftbuild.ac.ACMain;
+import main.java.net.endercraftbuild.ac.utils.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,11 +22,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -38,7 +32,7 @@ import org.bukkit.util.Vector;
 public class PlayerListener implements Listener {
 
 
-	private List<String> justJumped = new ArrayList<String>();
+	private List<String> Jump = new ArrayList<String>();
 
 	private ACMain plugin;
 
@@ -142,4 +136,51 @@ public class PlayerListener implements Listener {
 		//event.setCancelled(true); This event isn't cancellable... 
 		//TODO : Cancel all world exp drops
 	}
+
+
+@EventHandler(ignoreCancelled = true)
+public void DoubleJump(final PlayerInteractEvent event) { //Jump
+
+	Player player = event.getPlayer();
+	Integer playerexp = player.getTotalExperience();
+	Location loc = player.getLocation();
+	Vector jump = player.getLocation().getDirection().multiply(0.3).setY(1);
+	if(playerexp >= 4)
+	{
+
+		if(Jump.contains(player.getName()))
+			return;
+		if(!player.hasPermission("ac.doublejump"))
+				return;
+		if (player.getItemInHand().getType() == Material.FEATHER)
+		{
+			if (!event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR))
+			{
+				
+				if((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK
+						|| event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+				player.setVelocity(player.getVelocity().add(jump));
+				player.playSound(loc, Sound.IRONGOLEM_THROW, 10, -10);
+				player.sendMessage(plugin.prefix + ChatColor.RED + "**WOOSH**");
+				Jump.add(player.getName());
+
+				Utils.setEnergy(player, playerexp -= 4);
+			}
+				else if(!(playerexp >= 4)) {
+					player.sendMessage(plugin.prefix + ChatColor.RED + "You need more energy!");
+				}
+				final PlayerListener self = this;
+
+				Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+					public void run() {
+						if(!self.Jump.contains(event.getPlayer().getName()))
+							return;
+						self.Jump.remove(event.getPlayer().getName());
+					}
+				}, 25L);
+
+			}
+		}
+	}
+}
 }

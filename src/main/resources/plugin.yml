@@ -1,5 +1,5 @@
 name: ECB AC
-main: net.endercraftbuild.ac.ACMain
+main: main.java.net.endercraftbuild.ac.ACMain
 version: 1.0
 author: superpeanut911, MortuTBK
 permissions:
